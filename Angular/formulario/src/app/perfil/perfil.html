@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Simple</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Formulario de Información</h2>
+    <form>
+      
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text"[(ngModel)]="nombre" name="nombre" class="form-control"  id="nombre" placeholder="Introduce tu nombre" required>
+            <p>{{nombre.length}}</p>
+            
+            
+        </div>
+        <div class="mb-3">
+            <label for="apellidos" class="form-label">Apellidos</label>
+            <input type="text"[(ngModel)]="apellidos" name="apellidos" class="form-control" id="nombre" placeholder="Introduce tu apellido" required>
+            <p>{{apellidos.length}}</p>
+            
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" placeholder="Introduce tu email" required>
+          {{email}}
+      </div>
+
+        
+        <div class="mb-3">
+          <label for="edad" class="form-label">Edad</label>
+          <input type="number" [(ngModel)]="edad" [style.color]="edad>18?'green':'red'" name="edad" class="form-control" id="edad" placeholder="Introduce tu edad" min="0" required>
+          {{edad}}
+          
+          
+      </div>
+
+       
+
+    
+        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="button" class="btn btn-secondary" (click)="resetear()">Resetear</button>
+    </form>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
