@@ -1,0 +1,38 @@
+<table class="table table-striped table-hover table-bordered text-center align-middle shadow rounded-3">
+  <thead class="table-dark">
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Edad</th>
+      <th>Curso</th>
+      <th>Sexo</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (alumno of alumnos; track $index) {
+      <tr>
+        <td>{{ $index + 1 }}</td>
+        <td>{{ alumno.nombre }}</td>
+        <td>{{ alumno.apellidos }}</td>
+        <td>{{ alumno.edad }}</td>
+        <td>{{ alumno.curso }}</td>
+        <td>
+          @if (alumno.sexo == 'mujer') {
+            <img src="https://images.icon-icons.com/510/PNG/512/woman_icon-icons.com_49954.png" alt="mujer" width="25">
+          } @else {
+            <img src="https://cdn-icons-png.freepik.com/256/3439/3439472.png?semt=ais_white_label" alt="hombre" width="25">
+          }
+        </td>
+      </tr>
+    }
+
+    
+  </tbody>
+
+  
+</table>
+<button>Modificar</button>
+<button>Elminar</button>
+
+
