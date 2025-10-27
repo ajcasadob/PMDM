@@ -1,8 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-calculo',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './calculo.html',
   styleUrl: './calculo.css',
 })
