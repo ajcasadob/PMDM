@@ -1,3 +1,5 @@
 <p>star-wars-people-list works!</p>
 
-@for(StarWars of StarWars; track name)
+@for(starWars of starWars; track starWars.name) {
+  <app-star-wars-person [nombreStarWars]="starWars.name" [tipoStarWarss]="starWars.type"></app-star-wars-person>
+}           

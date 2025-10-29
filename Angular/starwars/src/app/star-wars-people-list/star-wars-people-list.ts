@@ -8,12 +8,12 @@ import { StarWarsPerson } from '../star-wars-person/star-wars-person';
   styleUrl: './star-wars-people-list.css',
 })
 export class StarWarsPeopleList {
-
 starWars = [
-    { name: 'Bulbasaur', type: 'Grass/Poison' },
-    { name: 'Charmander', type: 'Fire' },
-    { name: 'Squirtle', type: 'Water' },
-    { name: 'Pikachu', type: 'Electric' },
-  ];
+  { name: 'Luke Skywalker', type: 'Jedi' },
+  { name: 'Darth Vader', type: 'Sith' },
+  { name: 'Han Solo', type: 'Smuggler' },
+  { name: 'Leia Organa', type: 'Rebel' }
+];
+
 
 }
