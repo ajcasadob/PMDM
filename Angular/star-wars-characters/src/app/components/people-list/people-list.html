@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>⭐ Personajes de Star Wars ⭐</h1>
+
+  <div *ngIf="loading" class="loading">Cargando personajes...</div>
+
+  <div class="grid" *ngIf="!loading">
+    <div class="card" *ngFor="let person of people">
+      <h2>{{ person.name }}</h2>
+      <p><strong>Género:</strong> {{ person.gender }}</p>
+      <p><strong>Altura:</strong> {{ person.height }} cm</p>
+      <p><strong>Peso:</strong> {{ person.mass }} kg</p>
+      <p><strong>Color de cabello:</strong> {{ person.hair_color }}</p>
+      <p><strong>Año de nacimiento:</strong> {{ person.birth_year }}</p>
+    </div>
+  </div>
+</div>

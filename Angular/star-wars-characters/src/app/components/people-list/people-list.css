@@ -1,0 +1,30 @@
+.container {
+  text-align: center;
+  padding: 20px;
+  background-color: #0b0c10;
+  color: #c5c6c7;
+  min-height: 100vh;
+}
+
+h1 {
+  color: #66fcf1;
+  margin-bottom: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: #1f2833;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #45a29e;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
