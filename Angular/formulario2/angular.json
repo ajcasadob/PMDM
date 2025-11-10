@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "star-wars-characters": {
+    "formulario2": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -15,7 +15,8 @@
           "options": {
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -25,6 +26,7 @@
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ]
           },
@@ -56,10 +58,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "star-wars-characters:build:production"
+              "buildTarget": "formulario2:build:production"
             },
             "development": {
-              "buildTarget": "star-wars-characters:build:development"
+              "buildTarget": "formulario2:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +74,8 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing"
+              "zone.js/testing",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
