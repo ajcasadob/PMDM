@@ -1,29 +1,91 @@
 <form [formGroup]="registerFormGroup" (ngSubmit)="onLoginClicked()" class="p-4 rounded shadow-sm bg-white">
+
+    <!-- Nombre -->
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre:</label>
-        <input id="nombre" formControlName="nombre" class="form-control" />
+        <input id="nombre" formControlName="nombre" class="form-control"
+            [class.is-invalid]="registerFormGroup.get('nombre')?.invalid && (registerFormGroup.get('nombre')?.dirty || registerFormGroup.get('nombre')?.touched)" />
+
+        @if (registerFormGroup.get('nombre')?.invalid && (registerFormGroup.get('nombre')?.dirty ||
+        registerFormGroup.get('nombre')?.touched)) {
+        <div class="invalid-feedback d-block">
+            @if (registerFormGroup.get('nombre')?.errors?.['required']) {
+            <span>El nombre es obligatorio.</span>
+            }
+        </div>
+        }
     </div>
 
+    <!-- Apellidos -->
     <div class="mb-3">
         <label for="apellidos" class="form-label">Apellidos:</label>
-        <input id="apellidos" formControlName="apellidos" class="form-control" />
+        <input id="apellidos" formControlName="apellidos" class="form-control"
+            [class.is-invalid]="registerFormGroup.get('apellidos')?.invalid && (registerFormGroup.get('apellidos')?.dirty || registerFormGroup.get('apellidos')?.touched)" />
+        @if (registerFormGroup.get('apellidos')?.invalid && (registerFormGroup.get('apellidos')?.dirty ||
+        registerFormGroup.get('apellidos')?.touched)) {
+        <div class="invalid-feedback d-block">
+            @if (registerFormGroup.get('apellidos')?.errors?.['required']) {
+            <span>Los apellidos son obligatorios.</span>
+            }
+        </div>
+        }
     </div>
 
+    <!-- NIF -->
     <div class="mb-3">
         <label for="nif" class="form-label">NIF:</label>
-        <input id="nif" formControlName="nif" class="form-control" />
+        <input id="nif" formControlName="nif" class="form-control" placeholder="12345678A"
+            [class.is-invalid]="registerFormGroup.get('nif')?.invalid && (registerFormGroup.get('nif')?.dirty || registerFormGroup.get('nif')?.touched)" />
+        @if (registerFormGroup.get('nif')?.invalid && (registerFormGroup.get('nif')?.dirty ||
+        registerFormGroup.get('nif')?.touched)) {
+        <div class="invalid-feedback d-block">
+            @if (registerFormGroup.get('nif')?.errors?.['required']) {
+            <span>El NIF es obligatorio.</span>
+            }
+            @if (registerFormGroup.get('nif')?.errors?.['pattern']) {
+            <span>El NIF debe tener 8 dígitos seguidos de una letra (ej: 12345678A).</span>
+            }
+        </div>
+        }
     </div>
 
+    <!-- Email -->
     <div class="mb-3">
         <label for="email" class="form-label">Email:</label>
-        <input id="email" formControlName="email" type="email" class="form-control" />
+        <input id="email" formControlName="email" type="email" class="form-control"
+            [class.is-invalid]="registerFormGroup.get('email')?.invalid && (registerFormGroup.get('email')?.dirty || registerFormGroup.get('email')?.touched)" />
+        @if (registerFormGroup.get('email')?.invalid && (registerFormGroup.get('email')?.dirty ||
+        registerFormGroup.get('email')?.touched)) {
+        <div class="invalid-feedback d-block">
+            @if (registerFormGroup.get('email')?.errors?.['required']) {
+            <span>El email es obligatorio.</span>
+            }
+            @if (registerFormGroup.get('email')?.errors?.['email']) {
+            <span>Debe introducir un email válido.</span>
+            }
+        </div>
+        }
     </div>
 
+    <!-- Teléfono -->
     <div class="mb-3">
         <label for="telefono" class="form-label">Teléfono:</label>
-        <input id="telefono" formControlName="telefono" class="form-control" />
+        <input id="telefono" formControlName="telefono" class="form-control" placeholder="612345678"
+            [class.is-invalid]="registerFormGroup.get('telefono')?.invalid && (registerFormGroup.get('telefono')?.dirty || registerFormGroup.get('telefono')?.touched)" />
+        @if (registerFormGroup.get('telefono')?.invalid && (registerFormGroup.get('telefono')?.dirty ||
+        registerFormGroup.get('telefono')?.touched)) {
+        <div class="invalid-feedback d-block">
+            @if (registerFormGroup.get('telefono')?.errors?.['required']) {
+            <span>El teléfono es obligatorio.</span>
+            }
+            @if (registerFormGroup.get('telefono')?.errors?.['pattern']) {
+            <span>El teléfono debe tener 9 dígitos.</span>
+            }
+        </div>
+        }
     </div>
 
+    <!-- Sexo -->
     <div class="mb-3">
         <label class="form-label d-block">Sexo:</label>
         <div class="form-check form-check-inline">
@@ -38,25 +100,77 @@
             <input type="radio" formControlName="sexo" value="Otro" class="form-check-input" id="sexoOtro" />
             <label for="sexoOtro" class="form-check-label">Otro</label>
         </div>
+        @if (registerFormGroup.get('sexo')?.invalid && (registerFormGroup.get('sexo')?.dirty ||
+        registerFormGroup.get('sexo')?.touched)) {
+        <div class="text-danger small">
+            <span>Debe seleccionar una opción.</span>
+        </div>
+        }
     </div>
 
+    <!-- Cómo conoció la página -->
     <div class="mb-3">
         <label for="conocido" class="form-label">¿Cómo conoció la página?</label>
-        <select id="conocido" formControlName="conocido" class="form-select">
+        <select id="conocido" formControlName="conocido" class="form-select"
+            [class.is-invalid]="registerFormGroup.get('conocido')?.invalid && (registerFormGroup.get('conocido')?.dirty || registerFormGroup.get('conocido')?.touched)">
+            <option value="">Seleccione una opción</option>
             <option value="Google">Buscando en Google</option>
             <option value="Amigo">A través de un amigo</option>
             <option value="Profesor">Por mi profesor</option>
         </select>
+        @if (registerFormGroup.get('conocido')?.invalid && (registerFormGroup.get('conocido')?.dirty ||
+        registerFormGroup.get('conocido')?.touched)) {
+        <div class="invalid-feedback d-block">
+            <span>Debe seleccionar cómo conoció la página.</span>
+        </div>
+        }
     </div>
 
+    <!-- Contraseña -->
     <div class="mb-3">
         <label for="password" class="form-label">Contraseña:</label>
-        <input id="password" formControlName="password" type="password" class="form-control" />
+        <input id="password" formControlName="password" type="password" class="form-control"
+            [class.is-invalid]="registerFormGroup.get('password')?.invalid && (registerFormGroup.get('password')?.dirty || registerFormGroup.get('password')?.touched)" />
+        @if (registerFormGroup.get('password')?.invalid && (registerFormGroup.get('password')?.dirty ||
+        registerFormGroup.get('password')?.touched)) {
+        <div class="invalid-feedback d-block">
+            @if (registerFormGroup.get('password')?.errors?.['required']) {
+            <span>La contraseña es obligatoria.</span>
+            }
+        </div>
+        }
     </div>
 
+    <!-- Confirmar Contraseña -->
     <div class="mb-3">
         <label for="confirmPassword" class="form-label">Confirmar Contraseña:</label>
-        <input id="confirmPassword" formControlName="confirmPassword" type="password" class="form-control" />
+        <input id="confirmPassword" formControlName="confirmPassword" type="password" class="form-control"
+            [class.is-invalid]="registerFormGroup.get('confirmPassword')?.invalid && (registerFormGroup.get('confirmPassword')?.dirty || registerFormGroup.get('confirmPassword')?.touched)" />
+        @if (registerFormGroup.get('confirmPassword')?.invalid && (registerFormGroup.get('confirmPassword')?.dirty ||
+        registerFormGroup.get('confirmPassword')?.touched)) {
+        <div class="invalid-feedback d-block">
+            @if (registerFormGroup.get('confirmPassword')?.errors?.['required']) {
+            <span>Debe confirmar la contraseña.</span>
+            }
+        </div>
+        }
+    </div>
+
+    <!-- Términos y Condiciones -->
+    <div class="mb-3">
+        <div class="form-check">
+            <input type="checkbox" formControlName="terminos" class="form-check-input" id="terminos"
+                [class.is-invalid]="registerFormGroup.get('terminos')?.invalid && (registerFormGroup.get('terminos')?.dirty || registerFormGroup.get('terminos')?.touched)" />
+            <label for="terminos" class="form-check-label">
+                Acepto los términos y condiciones
+            </label>
+        </div>
+        @if (registerFormGroup.get('terminos')?.invalid && (registerFormGroup.get('terminos')?.dirty ||
+        registerFormGroup.get('terminos')?.touched)) {
+        <div class="text-danger small">
+            <span>Debe aceptar los términos y condiciones.</span>
+        </div>
+        }
     </div>
 
     <div class="text-end mt-4">
