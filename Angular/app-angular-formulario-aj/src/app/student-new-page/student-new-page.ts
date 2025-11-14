@@ -1,10 +1,10 @@
 import { Component, NgModule } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-student-new-page',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './student-new-page.html',
   styleUrl: './student-new-page.css',
 })
