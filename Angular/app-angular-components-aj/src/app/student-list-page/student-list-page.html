@@ -1,0 +1,43 @@
+<div class="student-count">
+    <h2>Total de alumnos: {{ alumnos.length }}</h2>
+</div>
+
+<div class="cards-container">
+    @for (alumno of alumnos; track $index) {
+    <div class="card shadow">
+        <div class="card-header">
+            <div class="student-icon">
+                @if (alumno.sexo == 'Femenino') {
+                <img src="https://images.icon-icons.com/510/PNG/512/woman_icon-icons.com_49954.png" width="10%" alt="mujer">
+                } @else {
+                <img src="https://cdn-icons-png.freepik.com/256/3439/3439472.png?semt=ais_white_label" width="10%" alt="hombre">
+                }
+            </div>
+            <h3>{{ alumno.nombre }} {{ alumno.apellidos }}</h3>
+        </div>
+        <div class="card-body">
+            <div class="info-row">
+                <span class="label">Número de alumno:</span>
+                <span class="value">{{ alumno.numeroAlumno }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">DNI:</span>
+                <span class="value">{{ alumno.nif }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Edad:</span>
+                <span class="value">{{ alumno.edad }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Curso:</span>
+                <span class="value">{{ alumno.curso }}</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn-detail" (click)="verDetalle(alumno.nombre)">Ver detalle</button>
+        
+        </div>
+    </div>
+    }
+</div>
+
