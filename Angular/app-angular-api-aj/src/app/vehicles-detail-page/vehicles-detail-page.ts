@@ -24,7 +24,7 @@ constructor (
 ngOnInit(): void {
   
   const id = this.route.snapshot.paramMap.get('id')
-  if ( id != null){
+  if ( id ){
     this.service.getVehicle(+id).subscribe((resp)=>{
     this.vehicle =resp
     })

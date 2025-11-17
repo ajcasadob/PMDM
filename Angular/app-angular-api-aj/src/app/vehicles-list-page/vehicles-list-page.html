@@ -12,7 +12,7 @@
             <p class="card-text"><strong>Vehiculo largo</strong> {{ vehicle.length }} kg</p>
             <p class="card-text"><strong>Numero pasajeros</strong> {{ vehicle.passengers }}</p>
             <p class="card-text"><strong>Clase de vehiculo</strong> {{ vehicle.vehicle_class }}</p>
-            <a [routerLink]="['detallesVehiculos',vehicle.url.split('/')[5]]" class="btn btn-primary" >Ver detalles vehiculos</a>
+            <a [routerLink]="['/detallesVehiculos',vehicle.url.split('/')[5]]" class="btn btn-primary" >Ver detalles vehiculos</a>
             }
         </div>
     </div>

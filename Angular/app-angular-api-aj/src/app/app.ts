@@ -4,7 +4,7 @@ import { VehiclesListPage } from "./vehicles-list-page/vehicles-list-page";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, VehiclesListPage],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

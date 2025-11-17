@@ -14,21 +14,17 @@ export class VehiclesListPage implements OnInit{
 
 
   vehicle: Vehicle[] = [];
-  loading = true;
+  
 
   constructor(private VehicleService: VehicleService, private router: Router) {}
 
   ngOnInit(): void {
-    this.VehicleService.getVehicleList().subscribe({
-      next: (response) => {
-        this.vehicle = response.results;
-        this.loading = false;
-      }
+    this.VehicleService.getVehicleList().subscribe(resp=>{
+      
+        this.vehicle = resp.results;
+        
+  
     });
-  }
-verDetalles(vehicle: Vehicle) {
-    const id = vehicle.url.split('/').filter(Boolean).pop(); 
-    this.router.navigate(['/people', id]);
   }
 
 

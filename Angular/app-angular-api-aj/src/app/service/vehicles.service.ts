@@ -23,7 +23,7 @@ export class VehicleService {
 
     getVehicle(id: number): Observable<VehicleDetail> {
 
-        return this.http.get<VehicleDetail>(`https://swapi.dev/api/vehicles/id/${id}`);
+        return this.http.get<VehicleDetail>(`https://swapi.dev/api/vehicles/${id}`);
     }
 
 }
