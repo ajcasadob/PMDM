@@ -7,13 +7,13 @@
         <div class="card-body">
             @for (vehicle of vehicle; track $index) {
             <h2>{{ vehicle.name }}</h2>
-            <p class="card-text" ><strong>Modelo vehiculo</strong> {{ vehicle.model }}</p>
+            <p class="card-text"><strong>Modelo vehiculo</strong> {{ vehicle.model }}</p>
             <p class="card-text"><strong>Vehiculo manufractura</strong> {{ vehicle.manufacturer }} cm</p>
             <p class="card-text"><strong>Vehiculo largo</strong> {{ vehicle.length }} kg</p>
             <p class="card-text"><strong>Numero pasajeros</strong> {{ vehicle.passengers }}</p>
             <p class="card-text"><strong>Clase de vehiculo</strong> {{ vehicle.vehicle_class }}</p>
+            <a [routerLink]="['detallesVehiculos',vehicle.url.split('/')[5]]" class="btn btn-primary" >Ver detalles vehiculos</a>
             }
         </div>
     </div>
 </div>
-

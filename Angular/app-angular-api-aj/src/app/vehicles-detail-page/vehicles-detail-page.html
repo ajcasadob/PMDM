@@ -1,0 +1,85 @@
+@if (vehicle) {
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0 text-center">{{ vehicle.name }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-4">
+                            <div class="col-12 col-md-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <h6 class="text-muted mb-2">Modelo</h6>
+                                    <p class="mb-0 fw-bold">{{ vehicle.model }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <h6 class="text-muted mb-2">Fabricante</h6>
+                                    <p class="mb-0 fw-bold">{{ vehicle.manufacturer }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <h6 class="text-muted mb-2">Clase</h6>
+                                    <p class="mb-0 fw-bold">{{ vehicle.vehicle_class }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <h6 class="text-muted mb-2">Costo</h6>
+                                    <p class="mb-0 fw-bold">{{ vehicle.cost_in_credits }} <span class="text-muted">créditos</span></p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <h6 class="text-muted mb-2">Longitud</h6>
+                                    <p class="mb-0 fw-bold">{{ vehicle.length }} <span class="text-muted">m</span></p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <h6 class="text-muted mb-2">Tripulación</h6>
+                                    <p class="mb-0 fw-bold">{{ vehicle.crew }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <h6 class="text-muted mb-2">Pasajeros</h6>
+                                    <p class="mb-0 fw-bold">{{ vehicle.passengers }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-md-6">
+                                <div class="p-3 border rounded bg-light">
+                                    <h6 class="text-muted mb-2">Velocidad máxima</h6>
+                                    <p class="mb-0 fw-bold">{{ vehicle.max_atmosphering_speed }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="p-3 border rounded bg-light">
+                                    <h6 class="text-muted mb-2">Capacidad de carga</h6>
+                                    <p class="mb-0 fw-bold">{{ vehicle.cargo_capacity }} <span class="text-muted">kg</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                            <a routerLink="/vehicles" class="btn btn-primary">
+                                <i class="bi bi-arrow-left"></i> Volver a la lista
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+} 
