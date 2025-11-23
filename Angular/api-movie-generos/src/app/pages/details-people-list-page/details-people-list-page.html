@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <span class="navbar-brand">🎬 Movie App</span>
+        <div class="navbar-nav">
+            <a class="nav-link" routerLink="/tv_movies">🎬 Discover</a>
+            <a class="nav-link" routerLink="/">🎬 Películas</a>
+            <a class="nav-link active" routerLink="/personajes">👥 Personajes</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-5">
+    @if(people) {
+    <div class="row">
+        <div class="col-md-4">
+            <img [src]="people.profile_path ? 'https://image.tmdb.org/t/p/w500' + people.profile_path : 'https://via.placeholder.com/500x750?text=No+Image'"
+                [alt]="people.name" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-8">
+            <h1 class="mb-3">{{people.name}}</h1>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Información Personal</h5>
+                    <p><strong>Nombre Original:</strong> {{people.original_name}}</p>
+                    <p><strong>Departamento:</strong> {{people.known_for_department}}</p>
+                    <p><strong>Popularidad:</strong> <span class="badge bg-info text-dark">⭐ {{people.popularity |
+                            number:'1.1-1'}}</span></p>
+                    <p><strong>Género:</strong> {{people.gender === 1 ? 'Mujer' : people.gender === 2 ? 'Hombre' :
+                        'Noespecificado'}}</p>
+                </div>
+            </div>
+
+            @if(people.known_for && people.known_for.length > 0) {
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Conocido por</h5>
+                    <div class="row row-cols-1 row-cols-md-3 g-3">z
+                        @for (work of people.known_for; track work.id) {
+                        <div class="col">
+                            <div class="card h-100">
+                                <img [src]="work.poster_path ? 'https://image.tmdb.org/t/p/w200' + work.poster_path : 'https://via.placeholder.com/200x300?text=No+Image'"
+                                    [alt]="work.title || work.name" class="card-img-top">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{work.title || work.name}}</h6>
+                                    <span class="badge bg-warning text-dark">⭐ {{work.vote_average |
+                                        number:'1.1-1'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            }
+
+            <div class="mt-4">
+                <a routerLink="/personajes" class="btn btn-secondary">← Volver a la lista</a>
+            </div>
+        </div>
+    </div>
+    }
+</div>

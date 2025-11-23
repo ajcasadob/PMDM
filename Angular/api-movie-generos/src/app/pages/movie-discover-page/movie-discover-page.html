@@ -1,0 +1,94 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <span class="navbar-brand">🎬 Movie App</span>
+        <div class="navbar-nav">
+            <a class="nav-link active" routerLink="/tv_movies">🎬 Discover</a>
+            <a class="nav-link" href="/">🎬 Películas</a>
+            <a class="nav-link" routerLink="/personajes">👥 Personajes</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <h1 class="text-center mb-5">🎬 Discover - Películas y Series</h1>
+
+    <!-- Selectores de género -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <label class="form-label fw-bold">Selecciona género de películas:</label>
+                    <select [(ngModel)]="idGenres" (ngModelChange)="getDiscover()" class="form-select">
+                        <option [value]="0">-- Selecciona un género --</option>
+                        @for (genero of genres; track genero.id) {
+                        <option [value]="genero.id">{{genero.name}}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <label class="form-label fw-bold">Selecciona género de series:</label>
+                    <select [(ngModel)]="idGenresTv" (ngModelChange)="getDiscoverTv()" class="form-select">
+                        <option [value]="0">-- Selecciona un género --</option>
+                        @for (genero of genresTv; track genero.id) {
+                        <option [value]="genero.id">{{genero.name}}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Discover Movies por Género -->
+    @if(discover.length > 0){
+    <h2 class="mb-4">🎬 Películas</h2>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4 mb-5">
+        @for (pelicula of discover; track pelicula.id) {
+        <div class="col">
+            <div class="card h-100">
+                <img [src]="'https://image.tmdb.org/t/p/w500' + pelicula.poster_path" [alt]="pelicula.title"
+                    class="card-img-top" style="height: 330px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title" style="min-height: 50px;">{{pelicula.title}}</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-warning text-dark">⭐ {{pelicula.vote_average | number:'1.1-1'}}</span>
+                        <small class="text-muted">{{pelicula.release_date}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    }
+
+    <!-- Discover TV por Género -->
+    @if(discoverTv.length > 0){
+    <h2 class="mb-4">📺 Series</h2>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
+        @for (serie of discoverTv; track serie.id) {
+        <div class="col">
+            <div class="card h-100">
+                <img [src]="'https://image.tmdb.org/t/p/w500' + serie.poster_path" [alt]="serie.name"
+                    class="card-img-top" style="height: 330px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title" style="min-height: 50px;">{{serie.name}}</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-warning text-dark">⭐ {{serie.vote_average | number:'1.1-1'}}</span>
+                        <small class="text-muted">{{serie.first_air_date}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    }
+
+    @if(discover.length === 0 && discoverTv.length === 0){
+    <div class="text-center py-5">
+        <p class="text-muted fs-5">👆 Selecciona un género para ver películas o series</p>
+    </div>
+    }
+</div>

@@ -4,7 +4,7 @@ import { MovieListGenresPage } from "./pages/movie-list-genres-page/movie-list-g
 
 @Component({
   selector: 'app-root',
-  imports: [ MovieListGenresPage],
+  imports: [ RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

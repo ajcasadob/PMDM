@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <span class="navbar-brand">🎬 Movie App</span>
+        <div class="navbar-nav">
+            <a class="nav-link" routerLink="/tv_movies">🎬 Discover</a>
+            <a class="nav-link active" routerLink="/peliculas">🎥 Películas</a>
+            <a class="nav-link" routerLink="/personajes">👥 Personajes</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <h1 class="text-center mb-5">🎥 Listado de Películas</h1>
+
+    <!-- Selector de tipo de listado -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <label class="form-label fw-bold">Selecciona tipo de listado:</label>
+            <select [(ngModel)]="movieListType" (ngModelChange)="onMovieListTypeChange()" class="form-select">
+                <option value="popular">📊 Popular</option>
+                <option value="top_rated">⭐ Top Rated</option>
+                <option value="upcoming">🎬 Upcoming</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Listado de películas -->
+    @if(movies.length > 0){
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
+        @for (pelicula of movies; track pelicula.id) {
+        <div class="col">
+            <div class="card h-100">
+                <img [src]="'https://image.tmdb.org/t/p/w500' + pelicula.poster_path" [alt]="pelicula.title"
+                    class="card-img-top" style="height: 330px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title" style="min-height: 50px;">{{pelicula.title}}</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-warning text-dark">⭐ {{pelicula.vote_average | number:'1.1-1'}}</span>
+                        <small class="text-muted">{{pelicula.release_date}}</small>
+                    </div>
+                    <button (click)="goToDetail(pelicula.id)" class="btn btn-primary btn-sm w-100">Ver Detalles</button>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    } @else {
+    <div class="text-center py-5">
+        <p class="text-muted">Cargando películas...</p>
+    </div>
+    }
+</div>

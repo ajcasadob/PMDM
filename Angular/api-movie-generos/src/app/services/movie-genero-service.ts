@@ -18,7 +18,7 @@ export class MovieGeneroService {
 
   }
 
-  getGenresTv(id: number):Observable<TvGenresResponse>{
+  getGenresTv():Observable<TvGenresResponse>{
 
     return this.http.get<TvGenresResponse>(`https://api.themoviedb.org/3/genre/tv/list`)
 

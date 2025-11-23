@@ -1,37 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { Genre } from '../../interfaces/generos-interface';
-import { Movie } from '../../interfaces/lista-peliculas-generos-interface';
 import { MovieGeneroService } from '../../services/movie-genero-service';
-import { FormsModule } from '@angular/forms';
 import { DiscoverService } from '../../services/discover-service';
+import { Router, RouterLink } from '@angular/router';
+import { Genre } from '../../interfaces/generos-interface';
 import { TvGenre } from '../../interfaces/tv-genres.interface';
 import { TvShow } from '../../interfaces/tv-discover.interface';
+import { Movie } from '../../interfaces/lista-peliculas-generos-interface';
+import { FormsModule } from '@angular/forms';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-movie-list-genres-page',
-  imports: [FormsModule],
-  templateUrl: './movie-list-genres-page.html',
-  styleUrl: './movie-list-genres-page.css',
+  selector: 'app-movie-discover-page',
+  imports: [FormsModule, DecimalPipe, RouterLink],
+  templateUrl: './movie-discover-page.html',
+  styleUrl: './movie-discover-page.css',
 })
-export class MovieListGenresPage implements OnInit {
+export class MovieDiscoverPage implements OnInit {
 
-
-  genres: Genre[] = []
+   genres: Genre[] = []
   discover: Movie[] = []
   idGenres!: number
   genresTv : TvGenre[] = []
   discoverTv : TvShow[] = []
-  idGenresTv! : number 
+  idGenresTv! : number
+
+constructor(
+  private service : MovieGeneroService,
+  private serviceDiscover : DiscoverService,
+  private router : Router
+) {}
 
 
- constructor(private service: MovieGeneroService,
-    private serviceDiscover: DiscoverService
-  ) { }
 
-  
-  onGenreChange(): void {
-    this.getDiscover();
-  }
 
   ngOnInit(): void {
     this.getGenres();
@@ -45,29 +45,27 @@ export class MovieListGenresPage implements OnInit {
   }
 
   getDiscover(): void {
+    this.discoverTv = [];
     if (this.idGenres) {
       this.serviceDiscover.getDiscover(this.idGenres).subscribe(resp => {
         this.discover = resp.results;
       })
-
     }
   }
 
   getGenresTv(): void{
-    this.service.getGenresTv().subscribe(resp=>{
+    this.service.getGenresTv().subscribe(resp => {
       this.genresTv = resp.genres;
-    }
-
-    )
-    
-    
+    })
   }
 
   getDiscoverTv():void{
+    this.discover = [];
     if(this.idGenresTv){
         this.serviceDiscover.getDiscoverTv(this.idGenresTv).subscribe(resp =>{
           this.discoverTv = resp.results;
         })
     }
   }
+
 }

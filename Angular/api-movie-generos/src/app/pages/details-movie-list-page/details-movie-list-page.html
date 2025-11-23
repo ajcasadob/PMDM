@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <span class="navbar-brand">🎬 Movie App</span>
+        <div class="navbar-nav">
+            <a class="nav-link" routerLink="/tv_movies">🎬 Discover</a>
+            <a class="nav-link active" routerLink="/">🎬 Películas</a>
+            <a class="nav-link" routerLink="/personajes">👥 Personajes</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-5">
+    @if(details) {
+    <div class="row">
+        <div class="col-md-4">
+            <img [src]="details.poster_path ? 'https://image.tmdb.org/t/p/w500' + details.poster_path : 'https://via.placeholder.com/500x750?text=No+Image'"
+                [alt]="details.title" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-8">
+            <h1 class="mb-3">{{details.title}}</h1>
+            <p class="text-muted mb-4">{{details.original_title}}</p>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Información General</h5>
+                    <p><strong>Fecha de Estreno:</strong> {{details.release_date | date:'dd/MM/yyyy'}}</p>
+                    <p><strong>Puntuación:</strong> <span class="badge bg-warning text-dark">⭐ {{details.vote_average |
+                            number:'1.1-1'}}</span> ({{details.vote_count}} votos)</p>
+                    <p><strong>Popularidad:</strong> {{details.popularity | number:'1.0-0'}}</p>
+                    <p><strong>Idioma Original:</strong> {{details.original_language | uppercase}}</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Sinopsis</h5>
+                    <p>{{details.overview || 'No hay sinopsis disponible.'}}</p>
+                </div>
+            </div>
+
+            @if(details.backdrop_path) {
+            <div class="card mb-3">
+                <img [src]="'https://image.tmdb.org/t/p/original' + details.backdrop_path" [alt]="details.title"
+                    class="card-img-top">
+            </div>
+            }
+
+            <div class="mt-4">
+                <a routerLink="/" class="btn btn-secondary">← Volver a películas</a>
+            </div>
+        </div>
+    </div>
+    }
+</div>
