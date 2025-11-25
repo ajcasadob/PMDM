@@ -1,11 +1,44 @@
+<div class="container mt-5">
+    <h2>Control de Barra de Progreso</h2>
 
-<br><br><br><br><br><br>
-<div class="progress">
-    <div class="progress-bar {{ color }}" [class.progress-bar-striped]="striped"
-        [class.progress-bar-animated]="animated" role="progressbar" [style.width.%]="value" [attr.aria-valuenow]="value"
-        aria-valuemin="0" aria-valuemax="100">
-        @if (showLabel) {
-        <span>{{ value }}%</span>
-        }
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label class="form-label">Controles de progreso:</label>
+            <div class="btn-group" role="group">
+                <button class="btn btn-success" (click)="aumentar()">
+                    ➕ Aumentar
+                </button>
+                <button class="btn btn-danger" (click)="disminuir()">
+                    ➖ Disminuir
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="colorSelect" class="form-label">Seleccionar color:</label>
+            <select id="colorSelect" class="form-select" [(ngModel)]="colorSeleccionado">
+                @for (color of colores; track color.valor) {
+                <option [value]="color.valor">
+                    {{ color.nombre }}
+                </option>
+                }
+            </select>
+        </div>
     </div>
+
+    <div class="mb-3">
+        <div class="progress">
+            <div class="progress-bar {{ colorSeleccionado }}" [class.progress-bar-striped]="striped"
+                [class.progress-bar-animated]="animated" role="progressbar" [style.width.%]="progreso"
+                [attr.aria-valuenow]="progreso" aria-valuemin="0" aria-valuemax="100">
+                @if (showLabel) {
+                <span>{{ progreso }}%</span>
+                }
+            </div>
+        </div>
+    </div>
+
+    <p class="text-center">
+        <strong>Progreso actual: {{ progreso }}%</strong>
+    </p>
 </div>
