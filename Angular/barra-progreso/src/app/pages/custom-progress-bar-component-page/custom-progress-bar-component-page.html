@@ -1,0 +1,11 @@
+
+<br><br><br><br><br><br>
+<div class="progress">
+    <div class="progress-bar {{ color }}" [class.progress-bar-striped]="striped"
+        [class.progress-bar-animated]="animated" role="progressbar" [style.width.%]="value" [attr.aria-valuenow]="value"
+        aria-valuemin="0" aria-valuemax="100">
+        @if (showLabel) {
+        <span>{{ value }}%</span>
+        }
+    </div>
+</div>
