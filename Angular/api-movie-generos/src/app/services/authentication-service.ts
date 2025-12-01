@@ -1,0 +1,28 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CreateRequestTokenResponse } from '../interfaces/create-request-token-response.interface';
+import { CreateSessionDto } from '../dto/create-session.dto';
+import { CreateSessionResponse } from '../interfaces/create-session-response.interface';
+import { CreateAccountResponse } from '../interfaces/create-account-response.interface';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthenticationService {
+  
+  constructor(private http : HttpClient){}
+
+  createRequestToken (): Observable <CreateRequestTokenResponse>{
+    return this.http.get<CreateRequestTokenResponse>('https://api.themoviedb.org/3/authentication/token/new')
+  }
+
+  createSession(dto : CreateSessionDto): Observable<CreateSessionResponse>{
+    return this.http.post<CreateSessionResponse>('https://api.themoviedb.org/3/authentication/session/new',dto)
+  }
+
+  createAccount() : Observable<CreateAccountResponse>{
+    const session_id = localStorage.getItem('session_id');
+    return this.http.get<CreateAccountResponse>(`https://api.themoviedb.org/3/account?session_id=${session_id}`)
+  }
+}

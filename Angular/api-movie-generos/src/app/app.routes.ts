@@ -4,27 +4,44 @@ import { PeopleListPage } from './pages/people-list-page/people-list-page';
 import { DetailsPeopleListPage } from './pages/details-people-list-page/details-people-list-page';
 import { DetailsMovieListPage } from './pages/details-movie-list-page/details-movie-list-page';
 import { MovieDiscoverPage } from './pages/movie-discover-page/movie-discover-page';
+import { CreateSessionPage } from './pages/create-session-page/create-session-page';
+import { AccountListsPage } from './pages/account-lists-page/account-lists-page';
+import { ListDetailsPage } from './pages/list-details-page/list-details-page';
 
 export const routes: Routes = [
-     {
-            path:'',
-            component: MovieListPage,
-            pathMatch: 'full'
-        },
-        {
-            path: 'personajes',
-            component:PeopleListPage
-        },
-        {
-            path:'personajes/:id',
-            component:DetailsPeopleListPage
-        },
-        {
-            path:'popular/:id',
-            component:DetailsMovieListPage
-        },
-        {
-            path:'tv_movies',
-            component:MovieDiscoverPage
-        }
+    {
+        path: '',
+        component: MovieListPage,
+        pathMatch: 'full'
+    },
+    {
+        path: 'personajes',
+        component: PeopleListPage
+    },
+    {
+        path: 'personajes/:id',
+        component: DetailsPeopleListPage
+    },
+    {
+        path: 'popular/:id',
+        component: DetailsMovieListPage
+    },
+    {
+        path: 'tv_movies',
+        component: MovieDiscoverPage
+    },
+    {
+        path: 'create-session',
+        component: CreateSessionPage
+    },
+
+    {
+        path: 'mis-listas',
+        component: AccountListsPage
+    },
+    {
+        path: 'list/:id',
+        component: ListDetailsPage
+    }
+
 ];

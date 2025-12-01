@@ -6,12 +6,13 @@ import { Genre } from '../../interfaces/generos-interface';
 import { TvGenre } from '../../interfaces/tv-genres.interface';
 import { TvShow } from '../../interfaces/tv-discover.interface';
 import { Movie } from '../../interfaces/lista-peliculas-generos-interface';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
+import { AuthenticationService } from '../../services/authentication-service';
 
 @Component({
   selector: 'app-movie-discover-page',
-  imports: [FormsModule, DecimalPipe, RouterLink],
+  imports: [FormsModule, DecimalPipe, RouterLink,ReactiveFormsModule],
   templateUrl: './movie-discover-page.html',
   styleUrl: './movie-discover-page.css',
 })
@@ -27,7 +28,8 @@ export class MovieDiscoverPage implements OnInit {
 constructor(
   private service : MovieGeneroService,
   private serviceDiscover : DiscoverService,
-  private router : Router
+  private router : Router,
+  private authenticationService : AuthenticationService 
 ) {}
 
 
@@ -66,6 +68,13 @@ constructor(
           this.discoverTv = resp.results;
         })
     }
+  }
+
+  login(){
+    this.authenticationService.createRequestToken().subscribe(resp=>{
+      let token = resp.request_token;
+      window.open(`https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:4200/create-session`, '_blank')
+    })
   }
 
 }
