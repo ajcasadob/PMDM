@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AccountListsResponse } from '../interfaces/account-lists.interface';
 import { Observable, throwError } from 'rxjs';
+import { RemoveMovieFromListDto } from '../dto/remove-movie-from-list.dto';
+import { AddMovieToListDto } from '../dto/add-movie-to-list.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +29,42 @@ export class AccountListService {
         params: {
           session_id: sessionId,
           page: page.toString()
+        }
+      }
+    );
+  }
+
+  removeMovieFromList(listId: number, dto: RemoveMovieFromListDto): Observable<any> {
+    const sessionId = localStorage.getItem('session_id');
+
+    if (!sessionId) {
+      return throwError(() => new Error('No autenticado'));
+    }
+
+    return this.http.post(
+      `${this.baseUrl}/list/${listId}/remove_item`,
+      dto,
+      {
+        params: {
+          session_id: sessionId
+        }
+      }
+    );
+  }
+
+  addMovieToList(listId: number, dto: AddMovieToListDto): Observable<any> {
+    const sessionId = localStorage.getItem('session_id');
+
+    if (!sessionId) {
+      return throwError(() => new Error('No autenticado'));
+    }
+
+    return this.http.post(
+      `${this.baseUrl}/list/${listId}/add_item`,
+      dto,
+      {
+        params: {
+          session_id: sessionId
         }
       }
     );

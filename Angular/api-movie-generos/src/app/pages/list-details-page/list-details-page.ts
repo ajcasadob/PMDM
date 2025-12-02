@@ -3,6 +3,8 @@ import { ListDetailsResponse, ListMovie } from '../../interfaces/list-details.in
 import { ListDetailsService } from '../../services/list-details-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { AccountListService } from '../../services/account-list-service';
+import { RemoveMovieFromListDto } from '../../dto/remove-movie-from-list.dto';
 
 @Component({
   selector: 'app-list-details-page',
@@ -21,6 +23,7 @@ export class ListDetailsPage implements OnInit {
 
   constructor(
     private listDetailsService: ListDetailsService,
+    private accountListService: AccountListService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -66,6 +69,26 @@ export class ListDetailsPage implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/mis-listas']);
+  }
+
+  removeMovie(movieId: number): void {
+    if (!confirm('¿Estás seguro de que quieres eliminar esta película de la lista?')) {
+      return;
+    }
+
+    const dto = new RemoveMovieFromListDto(movieId);
+    
+    this.accountListService.removeMovieFromList(this.listId, dto).subscribe({
+      next: (response) => {
+        console.log('Película eliminada exitosamente', response);
+        // Recargar la lista después de eliminar
+        this.loadListDetails();
+      },
+      error: (error) => {
+        console.error('Error al eliminar la película:', error);
+        alert('Error al eliminar la película. Por favor, intenta de nuevo.');
+      }
+    });
   }
 
 }
