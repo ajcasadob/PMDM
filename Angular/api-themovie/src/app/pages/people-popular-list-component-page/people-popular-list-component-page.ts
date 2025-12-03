@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-people-popular-list-component-page',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './people-popular-list-component-page.html',
   styleUrl: './people-popular-list-component-page.css',
 })

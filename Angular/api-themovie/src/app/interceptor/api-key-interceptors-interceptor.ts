@@ -3,7 +3,7 @@ const API_KEY ='eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMGZkNDRlYzA5YWFhZWQ3NjZiMWU3OWZ
 export const apiKeyInterceptorsInterceptor: HttpInterceptorFn = (req, next) => {
 
   const reqWithHeader = req.clone({
-  headers: req.headers.set('Authorization', `Bearer${API_KEY}`),
+  headers: req.headers.set('Authorization', `Bearer ${API_KEY}`),
 });
   return next(reqWithHeader);
 };

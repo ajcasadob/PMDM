@@ -1,8 +1,31 @@
 @if (movie) {
-    <p>
-        {{movie.id}}
-        {{movie.genres}}
-        {{movie.adult}}
-        {{movie.popularity}}
-    </p>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" [alt]="movie.title"
+                class="img-fluid rounded">
+        </div>
+        <div class="col-md-8">
+            <h1>{{movie.title}}</h1>
+            <p class="text-muted">{{movie.tagline}}</p>
+
+            <div class="mb-3">
+                <strong>Géneros:</strong>
+                @for (genre of movie.genres; track genre.id) {
+                <span class="badge bg-primary me-1">{{genre.name}}</span>
+                }
+            </div>
+
+            <p><strong>Fecha de estreno:</strong> {{movie.release_date}}</p>
+            <p><strong>Duración:</strong> {{movie.runtime}} minutos</p>
+            <p><strong>Popularidad:</strong> {{movie.popularity}}</p>
+            <p><strong>Puntuación:</strong> {{movie.vote_average}}/10 ({{movie.vote_count}} votos)</p>
+            <p><strong>Estado:</strong> {{movie.status}}</p>
+
+            <h4>Sinopsis</h4>
+            <p>{{movie.overview}}</p>
+
+        </div>
+    </div>
+</div>
 }

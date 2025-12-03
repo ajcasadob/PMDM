@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie, MoviePopularResponse } from '../../interfaces/movie-popular-list.interface';
 import { MoviePopularListService } from '../../services/movie-popular-list-service';
 import { ActivatedRoute } from '@angular/router';
 import { MovieDetailsResponse } from '../../interfaces/movie-list-details.interface';
@@ -12,27 +11,17 @@ import { MovieDetailsResponse } from '../../interfaces/movie-list-details.interf
 })
 export class MovieDetailsPage implements OnInit {
 
+  movie!: MovieDetailsResponse;
 
-  movie!:MovieDetailsResponse
-  productId = Number
-  constructor(private serviceMovie: MoviePopularListService, private route:ActivatedRoute){}
+  constructor(private serviceMovie: MoviePopularListService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    
-    const id =Number(this.route.snapshot.paramMap.get('id'))
-    if(id){
-      this.serviceMovie.getMovie(id)
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (id) {
+      this.serviceMovie.getMovie(id).subscribe((resp) => {
+        this.movie = resp;
+      });
     }
-    
-  }
-
-  getMovie(id:number){
-
-   this.route.params.subscribe((params)=>{
-    this.productId.parseInt(params['id']);
-   });
-    
-
   }
 
 }
