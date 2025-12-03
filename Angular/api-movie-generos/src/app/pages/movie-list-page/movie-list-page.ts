@@ -6,6 +6,9 @@ import { UpcomingService } from '../../services/upcoming-service';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
+import { AccountListService } from '../../services/account-list-service';
+import { AccountList } from '../../interfaces/account-lists.interface';
+import { AddMovieToListDto } from '../../dto/add-movie-to-list.dto';
 
 @Component({
   selector: 'app-movie-list-page',
@@ -16,19 +19,23 @@ import { DecimalPipe } from '@angular/common';
 export class MovieListPage implements OnInit{
 
 
-  movies : MovieListPopular[]=[]
-  movieListType: string = 'popular'
+  movies : MovieListPopular[]=[];
+  movieListType: string = 'popular';
+  userLists: AccountList[] = [];
+  selectedMovieId: number | null = null;
+  showListsModal: boolean = false;
 
   constructor(private popularService:PopularService,
     private topService: TopRatedService,
     private upcomingService : UpcomingService,
+    private accountListService: AccountListService,
     private router: Router
   ){}
 
   ngOnInit(): void {
     
     this.loadMovies();
-
+    this.loadUserLists();
 
   }
 loadMovies(): void {
@@ -59,5 +66,46 @@ loadMovies(): void {
     this.router.navigate(['/popular', movieId]);
   }
 
+  loadUserLists(): void {
+    const sessionId = localStorage.getItem('session_id');
+    if (sessionId) {
+      this.accountListService.getAccountLists().subscribe({
+        next: (response) => {
+          this.userLists = response.results;
+        },
+        error: (error) => {
+          console.error('Error al cargar las listas del usuario:', error);
+        }
+      });
+    }
+  }
+
+  openListsModal(movieId: number): void {
+    this.selectedMovieId = movieId;
+    this.showListsModal = true;
+  }
+
+  closeListsModal(): void {
+    this.showListsModal = false;
+    this.selectedMovieId = null;
+  }
+
+  addToList(listId: number): void {
+    if (!this.selectedMovieId) return;
+
+    const dto = new AddMovieToListDto(this.selectedMovieId);
+    
+    this.accountListService.addMovieToList(listId, dto).subscribe({
+      next: (response) => {
+        console.log('Película añadida exitosamente', response);
+        alert('¡Película añadida a la lista!');
+        this.closeListsModal();
+      },
+      error: (error) => {
+        console.error('Error al añadir la película:', error);
+        alert('Error al añadir la película. Puede que ya esté en la lista.');
+      }
+    });
+  }
 
 }

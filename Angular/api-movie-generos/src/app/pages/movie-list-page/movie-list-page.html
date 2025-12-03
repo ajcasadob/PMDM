@@ -39,7 +39,15 @@
                         <span class="badge bg-warning text-dark">⭐ {{pelicula.vote_average | number:'1.1-1'}}</span>
                         <small class="text-muted">{{pelicula.release_date}}</small>
                     </div>
-                    <button (click)="goToDetail(pelicula.id)" class="btn btn-primary btn-sm w-100">Ver Detalles</button>
+                    <div class="d-grid gap-2">
+                        <button (click)="goToDetail(pelicula.id)" class="btn btn-primary btn-sm">Ver Detalles</button>
+                        @if(userLists.length > 0) {
+                        <button (click)="openListsModal(pelicula.id)" class="btn btn-success btn-sm">
+                            <i class="bi bi-plus-circle me-1"></i>
+                            Añadir a Lista
+                        </button>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -51,3 +59,50 @@
     </div>
     }
 </div>
+
+<!-- Modal para seleccionar lista -->
+@if(showListsModal) {
+<div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-list-ul me-2"></i>
+                    Selecciona una Lista
+                </h5>
+                <button type="button" class="btn-close" (click)="closeListsModal()"></button>
+            </div>
+            <div class="modal-body">
+                @if(userLists.length === 0) {
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    No tienes listas creadas. 
+                    <a routerLink="/my-lists" (click)="closeListsModal()">Crear una lista</a>
+                </div>
+                } @else {
+                <div class="list-group">
+                    @for(list of userLists; track list.id) {
+                    <button 
+                        type="button" 
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                        (click)="addToList(list.id)"
+                    >
+                        <div>
+                            <h6 class="mb-1">{{ list.name }}</h6>
+                            <small class="text-muted">{{ list.item_count }} películas</small>
+                        </div>
+                        <i class="bi bi-plus-circle text-success fs-5"></i>
+                    </button>
+                    }
+                </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeListsModal()">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+}

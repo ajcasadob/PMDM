@@ -4,6 +4,7 @@ import { AccountListsResponse } from '../interfaces/account-lists.interface';
 import { Observable, throwError } from 'rxjs';
 import { RemoveMovieFromListDto } from '../dto/remove-movie-from-list.dto';
 import { AddMovieToListDto } from '../dto/add-movie-to-list.dto';
+import { CreateListResponse } from '../interfaces/create-list-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -69,4 +70,6 @@ export class AccountListService {
       }
     );
   }
+
+
 }
