@@ -1,16 +1,104 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-6">
-      <h2 class="mb-4">Provincias</h2>
-      
-      <div class="mb-3">
-        <label for="provinciaSelect" class="form-label">Selecciona una provincia:</label>
-        <select class="form-select" id="provinciaSelect">
-          <option value="" selected>Seleccione una provincia...</option>
-          @for (provincia of ProvinciaList; track provincia.IDPovincia) {
-            <option [value]="provincia.IDPovincia">{{ provincia.Provincia }}</option>
+    <div class="col-md-10">
+      <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+          <h2 class="mb-0"><i class="bi bi-fuel-pump"></i> Gasolineras por Provincia y Municipio</h2>
+        </div>
+        <div class="card-body">
+          
+          <!-- Selector de Provincia -->
+          <div class="mb-4">
+            <label for="provinciaSelect" class="form-label fw-bold">
+              <i class="bi bi-geo-alt-fill text-primary"></i> Selecciona una provincia:
+            </label>
+            <select class="form-select form-select-lg" id="provinciaSelect" [(ngModel)]="idProvincia" (change)="getMunicipios()">
+              <option value="" selected>-- Seleccione una provincia --</option>
+              @for (provincia of ProvinciaList; track provincia.IDPovincia) {
+                <option [value]="provincia.IDPovincia">{{ provincia.Provincia }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- Selector de Municipio -->
+          @if (MunicipioList.length > 0) {
+            <div class="mb-4">
+              <label for="municipioSelect" class="form-label fw-bold">
+                <i class="bi bi-building text-success"></i> Selecciona un municipio:
+              </label>
+              <select class="form-select form-select-lg" id="municipioSelect" [(ngModel)]="idEstacionMunicipio" (change)="getEstacionMunicipio()">
+                <option value="" selected>-- Seleccione un municipio --</option>
+                @for (municipio of MunicipioList; track municipio.IDMunicipio) {
+                  <option [value]="municipio.IDMunicipio">{{ municipio.Municipio }}</option>
+                }
+              </select>
+            </div>
           }
-        </select>
+
+          <!-- Lista de Estaciones -->
+          @if (ListEstaciones.length > 0) {
+            <div class="mt-5">
+              <h4 class="mb-4 text-center">
+                <i class="bi bi-list-ul"></i> Estaciones de Servicio Disponibles 
+                <span class="badge bg-secondary">{{ ListEstaciones.length }}</span>
+              </h4>
+              <div class="row">
+                @for (estacion of ListEstaciones; track $index) {
+                  <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-primary shadow-sm">
+                      <div class="card-header bg-light">
+                        <h5 class="mb-0 text-primary">
+                          <i class="bi bi-fuel-pump-fill"></i> {{ estacion.rotulo || 'Estación sin nombre' }}
+                        </h5>
+                      </div>
+                      <div class="card-body">
+                        <p class="mb-2">
+                          <i class="bi bi-signpost-2-fill text-secondary"></i> 
+                          <strong>Dirección:</strong> {{ estacion.direccion }}
+                        </p>
+                        <p class="mb-2">
+                          <i class="bi bi-geo-fill text-danger"></i> 
+                          <strong>Localidad:</strong> {{ estacion.localidad }}
+                        </p>
+                        <p class="mb-3">
+                          <i class="bi bi-clock-fill text-info"></i> 
+                          <strong>Horario:</strong> {{ estacion.horario }}
+                        </p>
+                        
+                        <div class="mb-3">
+                          @if (estacion.precioGasolina95E5) {
+                            <span class="badge bg-primary me-2 fs-6 p-2">
+                              <i class="bi bi-fuel-pump"></i> Gasolina 95: {{ estacion.precioGasolina95E5 }}€
+                            </span>
+                          }
+                          @if (estacion.precioGasoleoA) {
+                            <span class="badge bg-success fs-6 p-2">
+                              <i class="bi bi-droplet-fill"></i> Gasóleo A: {{ estacion.precioGasoleoA }}€
+                            </span>
+                          }
+                        </div>
+                        
+                        
+                          <a [href]="'https://www.google.com/maps/search/?api=1&query=' + (estacion.direccion + ' ' + estacion.localidad)"
+                            target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-search me-1"></i> Buscar en Maps
+                        </a>
+                        
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+          
+          @if (idEstacionMunicipio && ListEstaciones.length === 0) {
+            <div class="alert alert-warning text-center mt-4" role="alert">
+              <i class="bi bi-exclamation-triangle-fill"></i> No se encontraron estaciones de servicio en este municipio.
+            </div>
+          }
+          
+        </div>
       </div>
     </div>
   </div>
