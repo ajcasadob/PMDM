@@ -1,6 +1,5 @@
-
-import 'package:ejemplo_widget/pages/custom_page_gmail.dart';
 import 'package:flutter/material.dart';
+import 'package:list_view_actor/pages/actor_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Gmail Header',
+      title: 'Flutter Demo',
       theme: ThemeData(
-      
+       
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: GmailPage()
+      home: ActorPage(),
     );
   }
 }
