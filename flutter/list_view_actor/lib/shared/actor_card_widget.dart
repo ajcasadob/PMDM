@@ -20,7 +20,7 @@ class ActorCardWidget extends StatelessWidget {
       margin: const EdgeInsets.only(right: 12),
       child: Column(
         children: [
-          // COMPONENTE 1: Imagen
+        
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
