@@ -1,46 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:the_popcorn_movie/feature/movie_list/bloc/movie_list_bloc.dart';
+import 'package:the_popcorn_movie/core/models/movie_list.dart';
 
 class MovieListWidget extends StatelessWidget {
-  final MovieListBloc bloc;
+  final List<MovieResult> movieList; // Asume que tu modelo se llama Movie
   
-  const MovieListWidget({super.key, required this.bloc});
+  const MovieListWidget({super.key, required this.movieList});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieListBloc, MovieListState>(
-      bloc: bloc,
-      builder: (context, state) {
-        if (state is MovieListLoading) {
-          return Center(child: CircularProgressIndicator());
-        }
-        
-        if (state is MovieListSuccess) {
-          return ListView.builder(
-            itemCount: state.movieList.length,
-            itemBuilder: (context, index) {
-              final movie = state.movieList[index];
-              return ListTile(
-                leading: movie.posterPath != null
-                  ? Image.network(
-                      'https://image.tmdb.org/t/p/w92${movie.posterPath}',
-                      width: 50,
-                    )
-                  : Icon(Icons.movie),
-                
-                title: Text(movie.title),
-                
-              );
-            },
-          );
-        }
-        
-        if (state is MovieListError) {
-          return Center(child: Text(state.message));
-        }
-        
-        return Center(child: Text('Sin datos'));
+    return ListView.builder(
+      itemCount: movieList.length,
+      itemBuilder: (context, index) {
+        final movie = movieList[index];
+        return ListTile(
+          leading: movie.posterPath != null
+            ? Image.network(
+                'https://image.tmdb.org/t/p/w92${movie.posterPath}',
+                width: 50,
+                fit: BoxFit.cover,
+              )
+            : const Icon(Icons.movie),
+          
+          title: Text(movie.title),
+          subtitle: Text(movie.releaseDate),
+        );
       },
     );
   }
